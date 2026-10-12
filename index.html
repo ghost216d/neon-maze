@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Find the cores. Outrun the sentries. Escape the Neon Maze.">
+  <title>Neon Maze — After Hours</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080b18;--panel:#11172b;--muted:#9ca9c4;--cyan:#65f4ff;--pink:#ff56d8;--violet:#9c73ff;--lime:#c9ff75;--line:#ffffff15}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:#f5f7ff;font-family:'Space Grotesk',system-ui,sans-serif}
+    body{min-height:100svh;background:radial-gradient(ellipse at 50% -10%,#24204a 0,transparent 48%),radial-gradient(ellipse at 100% 65%,#10263e 0,transparent 38%),var(--bg);overflow-x:hidden}
+    button{font:inherit;color:inherit}button:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+    .shell{max-width:1080px;margin:auto;padding:clamp(16px,4vw,38px);min-height:100svh;display:flex;flex-direction:column}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.12em;font-size:13px}.brand-mark{width:31px;height:31px;border:1px solid #65f4ff88;border-radius:9px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 20px #65f4ff25;transform:rotate(-8deg)}.top-note{color:var(--muted);font:11px 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+    .hero{display:grid;grid-template-columns:1fr .92fr;gap:clamp(24px,6vw,72px);align-items:center;flex:1;padding:clamp(28px,6vh,70px) 0 24px}.eyebrow{color:var(--cyan);font:11px 'DM Mono',monospace;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:9px}.eyebrow:before{content:'';width:24px;height:1px;background:var(--cyan);box-shadow:0 0 9px var(--cyan)}
+    h1{font-size:clamp(46px,8vw,92px);line-height:.9;letter-spacing:-.075em;margin:21px 0 18px;max-width:560px}h1 span{display:block;color:transparent;-webkit-text-stroke:1.4px var(--cyan);text-shadow:0 0 30px #65f4ff32}.intro{font-size:clamp(15px,1.7vw,18px);line-height:1.65;color:#b2bdd4;max-width:435px;margin:0 0 27px}.cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.primary{border:0;border-radius:13px;background:linear-gradient(110deg,#a6ff78,#d6ff8b);color:#101525;font-size:15px;font-weight:700;padding:15px 23px;box-shadow:0 8px 30px #c9ff7528;cursor:pointer;transition:transform .18s,box-shadow .18s}.primary:hover{transform:translateY(-2px);box-shadow:0 10px 35px #c9ff7545}.meta{font:11px 'DM Mono',monospace;color:#8794af;line-height:1.8}
+    .preview-wrap{position:relative;max-width:450px;width:100%;justify-self:center}.preview-glow{position:absolute;inset:12% 5%;background:linear-gradient(135deg,#00ecff20,#a75bff25);filter:blur(48px);border-radius:40%}.preview-card{position:relative;padding:14px;border-radius:25px;background:linear-gradient(145deg,#ffffff1a,#ffffff05);border:1px solid #ffffff22;box-shadow:0 25px 80px #0008,inset 0 1px #ffffff24;transform:rotate(2deg)}.preview-top{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 4px 9px;color:#91a4c8;font:10px 'DM Mono',monospace;letter-spacing:.12em}.live-dot{color:var(--lime)}.poster{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:14px;background:#080d1e}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding-top:18px;margin-top:auto}.feature{padding:0 16px;border-right:1px solid var(--line)}.feature:first-child{padding-left:0}.feature:last-child{border:0}.feature b{display:block;font-size:12px;margin-bottom:4px}.feature span{font-size:11px;color:#8794af;line-height:1.4}
+    .game-screen{display:none;max-width:680px;margin:clamp(14px,4vh,34px) auto 0;width:100%;flex:1}.game-screen.active{display:flex;flex-direction:column}.game-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.game-title{font-weight:700;letter-spacing:.08em;font-size:13px}.exit-btn{border:1px solid var(--line);background:#ffffff08;padding:8px 12px;border-radius:10px;color:#aab6ce;font-size:12px;cursor:pointer}.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.hud-item{background:#11172b;border:1px solid #ffffff12;border-radius:12px;padding:9px 12px}.hud-item span{display:block;color:#8391ad;font:9px 'DM Mono',monospace;letter-spacing:.13em;text-transform:uppercase}.hud-item b{display:block;font-size:16px;margin-top:3px}.board-frame{padding:7px;border:1px solid #65f4ff48;background:linear-gradient(135deg,#65f4ff30,#9c73ff20);border-radius:18px;box-shadow:0 0 45px #00d9ff16}.board-inner{border-radius:12px;overflow:hidden;background:#070b17}.board{width:100%;display:block;aspect-ratio:1/1;touch-action:none}.game-footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding-top:11px}.status{font-size:12px;color:#a7b5d1;min-height:20px}.legend{display:flex;gap:12px;font:9px 'DM Mono',monospace;color:#94a1bd}.legend span{display:flex;gap:5px;align-items:center;white-space:nowrap}.keydot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--cyan);box-shadow:0 0 7px currentColor}.keydot.core{background:var(--lime)}.keydot.drone{background:var(--pink)}
+    .controls{display:none;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,42px);gap:5px;justify-content:center;margin:15px auto 0}.controls button{border:1px solid #65f4ff50;background:#131d38;border-radius:11px;color:#c8faff;font-size:18px;touch-action:manipulation;box-shadow:inset 0 0 12px #65f4ff0a}.controls .up{grid-column:2}.controls .left{grid-column:1;grid-row:2}.controls .down{grid-column:2;grid-row:2}.controls .right{grid-column:3;grid-row:2}
+    .modal{position:fixed;inset:0;background:#050815cc;backdrop-filter:blur(8px);display:none;place-items:center;padding:20px;z-index:5}.modal.show{display:grid}.modal-card{width:min(100%,360px);border:1px solid #65f4ff55;border-radius:22px;background:linear-gradient(145deg,#171e37,#0e1325);padding:28px;text-align:center;box-shadow:0 20px 80px #0009,0 0 45px #00eaff14}.modal-icon{font-size:34px;color:var(--lime);text-shadow:0 0 20px var(--lime)}.modal h2{font-size:30px;margin:10px 0 6px;letter-spacing:-.04em}.modal p{color:#a7b5d1;line-height:1.55;margin:0 0 20px;font-size:14px}.modal .primary{width:100%}
+    .toast{position:fixed;top:20px;left:50%;transform:translate(-50%,-15px);opacity:0;transition:.25s;background:#18233d;border:1px solid #65f4ff66;border-radius:99px;padding:10px 17px;font-size:12px;z-index:10;pointer-events:none}.toast.show{transform:translate(-50%,0);opacity:1}
+    @media(max-width:760px){.shell{padding:16px 18px max(18px,env(safe-area-inset-bottom))}.top-note{font-size:9px}.hero{grid-template-columns:1fr;gap:28px;padding:42px 0 28px}.hero-copy{text-align:center}.eyebrow{justify-content:center}h1{margin:17px auto;font-size:clamp(56px,15vw,82px)}.intro{margin:0 auto 22px}.cta-row{justify-content:center}.preview-wrap{max-width:350px}.features{margin-top:10px}.feature{padding:0 9px}.feature b{font-size:11px}.feature span{font-size:10px}.game-screen{margin-top:18px}.controls{display:grid}.game-footer{grid-template-columns:1fr;text-align:center}.legend{justify-content:center}.hud-item{padding:8px 5px;text-align:center}.hud-item b{font-size:14px}}
+    @media(max-height:740px) and (min-width:761px){.hero{padding:25px 0}.preview-wrap{max-width:350px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar"><div class="brand"><span class="brand-mark">✳</span> AFTER HOURS ARCADE</div><div class="top-note">INSERT COIN · STAY AWHILE</div></div>
+    <section class="hero" id="home">
+      <div class="hero-copy"><div class="eyebrow">A neon arcade original</div><h1>FIND THE<br><span>WAY OUT.</span></h1><p class="intro">The city grid is alive tonight. Grab the energy cores, keep clear of the sentries and make it to the exit before the lights go out.</p><div class="cta-row"><button class="primary" id="playBtn">Enter the maze&nbsp; ↗</button><div class="meta">ONE RUN · THREE LIVES<br>ARROW KEYS OR TOUCH CONTROLS</div></div></div>
+      <div class="preview-wrap"><div class="preview-glow"></div><div class="preview-card"><div class="preview-top"><span>SECTOR 01 — NIGHT SHIFT</span><span class="live-dot">● LIVE</span></div><canvas class="poster" id="poster" width="420" height="420"></canvas></div></div>
+    </section>
+    <section class="game-screen" id="game">
+      <div class="game-head"><div class="game-title">SECTOR <span id="levelNum">01</span> <span style="color:#8693ad">/ NIGHT SHIFT</span></div><button class="exit-btn" id="homeBtn">← Main menu</button></div>
+      <div class="hud"><div class="hud-item"><span>Cores</span><b id="cores">0 / 0</b></div><div class="hud-item"><span>Lives</span><b id="lives">♥ ♥ ♥</b></div><div class="hud-item"><span>Time</span><b id="timer">00:00</b></div><div class="hud-item"><span>Best</span><b id="best">—</b></div></div>
+      <div class="board-frame"><div class="board-inner"><canvas class="board" id="board" width="620" height="620" aria-label="Neon maze playfield"></canvas></div></div>
+      <div class="game-footer"><div class="status" id="status">Collect all the energy cores to unlock the exit.</div><div class="legend"><span><i class="keydot"></i>You</span><span><i class="keydot core"></i>Core</span><span><i class="keydot drone"></i>Sentry</span></div></div>
+      <div class="controls" aria-label="Touch controls"><button class="up" data-dir="up" aria-label="Move up">▲</button><button class="left" data-dir="left" aria-label="Move left">◀</button><button class="down" data-dir="down" aria-label="Move down">▼</button><button class="right" data-dir="right" aria-label="Move right">▶</button></div>
+    </section>
+    <footer class="features" id="features"><div class="feature"><b>EVERY RUN IS DIFFERENT</b><span>A fresh maze whenever you play.</span></div><div class="feature"><b>STAY SHARP</b><span>Sentries patrol the dark corridors.</span></div><div class="feature"><b>BUILT FOR THE GO</b><span>Play with keyboard or touch.</span></div></footer>
+  </main>
+  <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-card"><div class="modal-icon" id="modalIcon">✦</div><h2 id="modalTitle">Sector cleared</h2><p id="modalText">The city lights are yours.</p><button class="primary" id="nextBtn">Next sector&nbsp; →</button></div></div>
+  <div class="toast" id="toast">Core collected</div>
+<script>
+(()=>{
+  const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+  const board=$('#board'),ctx=board.getContext('2d'),poster=$('#poster'),pctx=poster.getContext('2d');
+  const N=15, TILE=board.width/(N*2+1); let grid,player,exit,cores,drones,level=1,lives=3,playing=false,over=false,elapsed=0,last=0,stepClock=0,droneClock=0,toastClock;
+  const key=(x,y)=>`${x},${y}`, dirs={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+  function generate(){
+    const w=N*2+1,h=N*2+1;grid=Array.from({length:h},()=>Array(w).fill(1));
+    const seen=Array.from({length:N},()=>Array(N).fill(false)), stack=[[0,0]];seen[0][0]=true;grid[1][1]=0;
+    while(stack.length){const [cx,cy]=stack[stack.length-1];const choices=[[0,-1],[1,0],[0,1],[-1,0]].filter(([dx,dy])=>cx+dx>=0&&cy+dy>=0&&cx+dx<N&&cy+dy<N&&!seen[cy+dy][cx+dx]);if(!choices.length){stack.pop();continue;}const [dx,dy]=choices[Math.floor(Math.random()*choices.length)],nx=cx+dx,ny=cy+dy;grid[cy*2+1+dy][cx*2+1+dx]=0;grid[ny*2+1][nx*2+1]=0;seen[ny][nx]=true;stack.push([nx,ny]);}
+    player={x:1,y:1};exit={x:w-2,y:h-2};
+    const spaces=[];for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++)if(grid[y][x]===0&&!(x===1&&y===1)&&!(x===exit.x&&y===exit.y))spaces.push({x,y});
+    spaces.sort(()=>Math.random()-.5);const count=Math.min(4+level,spaces.length-2);cores=new Set(spaces.slice(0,count).map(p=>key(p.x,p.y)));
+    drones=[];for(let i=0;i<Math.min(1+Math.floor(level/2),3);i++){const at=spaces[count+i]||spaces[spaces.length-1-i];drones.push({...at,dx:0,dy:0});}
+    $('#cores').textContent=`0 / ${cores.size}`;$('#levelNum').textContent=String(level).padStart(2,'0');$('#lives').textContent='♥ ♥ ♥';updateBest();draw();
+  }
+  function readBest(){try{return localStorage.getItem('neon-best-'+level);}catch{return null;}}
+  function updateBest(){const best=readBest();$('#best').textContent=best?`${best}s`:'—';}
+  function wall(x,y){return !grid[y]||grid[y][x]!==0;}
+  function roundedRect(c,x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r);}
+  function glowDot(c,x,y,r,color,blur){c.save();c.shadowColor=color;c.shadowBlur=blur;c.fillStyle=color;c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();c.restore();}
+  function drawTo(c,size,decor=true){
+    const h=N*2+1,s=size/h;c.clearRect(0,0,size,size);c.fillStyle='#080d1d';c.fillRect(0,0,size,size);
+    // soft floor glow and thin circuit lines
+    c.save();c.strokeStyle='#15203b';c.lineWidth=.65;
+    for(let i=0;i<=h;i++){c.beginPath();c.moveTo(i*s,0);c.lineTo(i*s,size);c.stroke();c.beginPath();c.moveTo(0,i*s);c.lineTo(size,i*s);c.stroke();}c.restore();
+    for(let y=0;y<h;y++)for(let x=0;x<h;x++)if(grid[y][x]){
+      const px=x*s,py=y*s;c.save();c.shadowColor='#22d9f5';c.shadowBlur=s*.35;
+      const grad=c.createLinearGradient(px,py,px+s,py+s);grad.addColorStop(0,'#183552');grad.addColorStop(1,'#201f49');c.fillStyle=grad;roundedRect(c,px+s*.09,py+s*.09,s*.82,s*.82,s*.12);c.fill();c.shadowBlur=0;c.strokeStyle='#4deafb';c.globalAlpha=.76;c.lineWidth=Math.max(1,s*.045);roundedRect(c,px+s*.13,py+s*.13,s*.74,s*.74,s*.1);c.stroke();c.restore();
+    }
+    // exit portal
+    c.save();const unlock=cores.size===0,ex=exit.x*s,ey=exit.y*s;c.shadowColor=unlock?'#c9ff75':'#9c73ff';c.shadowBlur=s*.75;c.strokeStyle=unlock?'#c9ff75':'#9c73ff';c.lineWidth=s*.12;c.beginPath();c.ellipse(ex+s/2,ey+s/2,s*.3,s*.39,0,0,Math.PI*2);c.stroke();c.fillStyle=unlock?'#c9ff7524':'#9c73ff20';c.fill();c.restore();
+    for(const k of cores){const [x,y]=k.split(',').map(Number);glowDot(c,(x+.5)*s,(y+.5)*s,s*.13,'#c9ff75',s*.55);}
+    for(const d of drones){const x=(d.x+.5)*s,y=(d.y+.5)*s;c.save();c.translate(x,y);c.rotate(Math.PI/4);c.shadowColor='#ff56d8';c.shadowBlur=s*.65;c.fillStyle='#ff56d8';roundedRect(c,-s*.27,-s*.27,s*.54,s*.54,s*.09);c.fill();c.shadowBlur=0;c.fillStyle='#fff';c.fillRect(-s*.1,-s*.035,s*.2,s*.07);c.restore();}
+    const x=(player.x+.5)*s,y=(player.y+.5)*s;glowDot(c,x,y,s*.3,'#65f4ff',s*.9);c.fillStyle='#e7feff';c.beginPath();c.arc(x,y,s*.11,0,Math.PI*2);c.fill();
+  }
+  function draw(){drawTo(ctx,board.width);}
+  function toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(toastClock);toastClock=setTimeout(()=>$('#toast').classList.remove('show'),850);}
+  function begin(){if(over){level=1;lives=3;elapsed=0;over=false;$('#modal').classList.remove('show');}playing=true;$('#home').style.display='none';$('#features').style.display='none';$('#game').classList.add('active');$('#status').textContent='Collect every energy core to unlock the exit.';generate();last=0;}
+  function move(dx,dy){if(!playing||over)return;const x=player.x+dx,y=player.y+dy;if(wall(x,y))return;player={x,y};if(cores.delete(key(x,y))){$('#cores').textContent=`${(4+level)-cores.size} / ${4+level}`;toast('Energy core secured');if(!cores.size)$('#status').textContent='Exit unlocked — find the portal!';}if(x===exit.x&&y===exit.y&&cores.size===0){win();return;}if(drones.some(d=>d.x===x&&d.y===y)){hit();return;}draw();}
+  function hit(){lives--;$('#lives').textContent=lives>0?'♥ '.repeat(lives).trim():'—';if(lives<=0){finish(false);return;}player={x:1,y:1};$('#status').textContent='A sentry found you. Back to the entrance!';draw();}
+  function win(){playing=false;over=true;const seconds=Math.floor(elapsed);const previous=Number(readBest());if(!previous||seconds<previous){try{localStorage.setItem('neon-best-'+level,seconds);}catch{}}$('#modalIcon').textContent='✦';$('#modalTitle').textContent='Sector cleared';$('#modalText').textContent=`You escaped in ${formatTime(seconds)}. The next sector has more cores and another sentry.`;$('#nextBtn').textContent='Next sector  →';$('#modal').classList.add('show');}
+  function finish(won){playing=false;over=true;$('#modalIcon').textContent=won?'✦':'◌';$('#modalTitle').textContent=won?'Sector cleared':'Signal lost';$('#modalText').textContent=won?'You made it out. Ready for another run?':'The sentries caught up with you. Take another shot?';$('#nextBtn').textContent=won?'Play again  →':'Retry sector  →';$('#modal').classList.add('show');}
+  function formatTime(s){return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
+  function advance(){if(over&&lives>0&&cores.size===0){level++;lives=Math.min(3,lives+1);elapsed=0;over=false;$('#modal').classList.remove('show');playing=true;generate();return;}level=1;lives=3;elapsed=0;over=false;$('#modal').classList.remove('show');generate();playing=true;}
+  function tick(t){if(!last)last=t;const dt=Math.min((t-last)/1000,.05);last=t;if(playing){elapsed+=dt;$('#timer').textContent=formatTime(Math.floor(elapsed));droneClock+=dt;if(droneClock>.48){droneClock=0;for(const d of drones){let opts=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>!wall(d.x+dx,d.y+dy));let forward=opts.filter(([dx,dy])=>!(d.dx===-dx&&d.dy===-dy));if(forward.length)opts=forward;if(opts.length){const [dx,dy]=opts[Math.floor(Math.random()*opts.length)];d.x+=dx;d.y+=dy;d.dx=dx;d.dy=dy;}if(d.x===player.x&&d.y===player.y){hit();break;}}draw();}}requestAnimationFrame(tick);}
+  function posterArt(){const n=11,s=poster.width/(n*2+1),g=Array.from({length:n*2+1},()=>Array(n*2+1).fill(1));for(let y=1;y<g.length-1;y++)for(let x=1;x<g.length-1;x++){g[y][x]=(x%2&&y%2)||Math.random()>.28?0:1;}pctx.fillStyle='#080d1d';pctx.fillRect(0,0,poster.width,poster.height);for(let y=0;y<g.length;y++)for(let x=0;x<g.length;x++)if(g[y][x]){pctx.shadowColor='#22d9f5';pctx.shadowBlur=8;pctx.fillStyle='#1a3152';pctx.fillRect(x*s+2,y*s+2,s-4,s-4);pctx.shadowBlur=0;}for(let i=0;i<18;i++){const x=1+Math.floor(Math.random()*(g.length-2)),y=1+Math.floor(Math.random()*(g.length-2));glowDot(pctx,(x+.5)*s,(y+.5)*s,3,'#c9ff75',12);}glowDot(pctx,1.5*s,1.5*s,8,'#65f4ff',20);pctx.save();pctx.shadowColor='#ff56d8';pctx.shadowBlur=15;pctx.fillStyle='#ff56d8';pctx.beginPath();pctx.arc(8.5*s,5.5*s,7,0,7);pctx.fill();pctx.restore();}
+  $('#playBtn').addEventListener('click',begin);$('#homeBtn').addEventListener('click',()=>{playing=false;$('#game').classList.remove('active');$('#home').style.display='grid';$('#features').style.display='grid';});$('#nextBtn').addEventListener('click',advance);
+  window.addEventListener('keydown',e=>{const d={ArrowUp:dirs.up,ArrowDown:dirs.down,ArrowLeft:dirs.left,ArrowRight:dirs.right,w:dirs.up,s:dirs.down,a:dirs.left,d:dirs.right}[e.key];if(d){e.preventDefault();move(...d);}if(e.key==='Escape'&&playing)$('#homeBtn').click();});
+  $$('[data-dir]').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();move(...dirs[b.dataset.dir]);}));posterArt();generate();$('#game').classList.remove('active');requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
